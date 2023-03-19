@@ -64,11 +64,6 @@ int main(int argc, char* argv[])
             genre = argv[i + 1];
         }
     }
-    if(file3_path == "" || file2_path == "" || file1_path == "" || genre == "")
-    {
-        std::cout << "wrong input parameters" << std::endl;
-        return -1;
-    }
     std::ifstream fin;
     std::string buff;
     std::map<std::string,Film> vc_films;
