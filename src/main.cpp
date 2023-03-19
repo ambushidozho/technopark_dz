@@ -41,10 +41,10 @@ struct Film
 int main(int argc, char* argv[])
 {
     setlocale(LC_ALL, "Russian");
-    std::string file1_path;
-    std::string file3_path;
-    std::string file2_path;
-    std::string genre;
+    std::string file1_path = "";
+    std::string file3_path = "";
+    std::string file2_path = "";
+    std::string genre = "";
     for(int i = 1; i < argc; i++)
     {
         if(std::string(argv[i]) == "-title-akas-path")
@@ -63,6 +63,11 @@ int main(int argc, char* argv[])
         {
             genre = argv[i + 1];
         }
+    }
+    if(file3_path == "" || file2_path == "" || file1_path == "" || genre == "")
+    {
+        std::cout << "wrong input parameters" << std::endl;
+        return -1;
     }
     std::ifstream fin;
     std::string buff;
