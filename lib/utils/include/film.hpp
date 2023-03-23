@@ -26,7 +26,7 @@ struct Film
 {
     if (this->local_title != "")
     {
-        std::cout << "Local Title: " << local_title << std::endl;
+        std::cout << "Title: " << local_title << std::endl;
     }
     else
     {

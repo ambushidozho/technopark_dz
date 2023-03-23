@@ -133,7 +133,7 @@ void Add_local_title(const std::string& path, std::map<std::string,Film>& map_of
                         switch (index)
                         {
                         case 2:
-                            localized_title = token;
+                            map_of_films[id].local_title = token;
                             break;                 
                         default:
                             break;
@@ -143,7 +143,6 @@ void Add_local_title(const std::string& path, std::map<std::string,Film>& map_of
                         } 
                     index++;
                 }
-                    map_of_films[id].local_title = localized_title;
             }
             else
                 continue;
