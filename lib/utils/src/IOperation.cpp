@@ -5,23 +5,28 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 
-
+bool isNumeric(std::string const& str)
+{
+	return !str.empty() && std::all_of(str.begin(), str.end(), ::isdigit);
+}
 
 
 void EchoOperation::ProcessLine(const std::string& str)
 {
-	str_ = str;
+	buff.push_back(str);
 }
 void EchoOperation::HandleEndOfInput()
 {
 	if (next_ == nullptr)
 	{
-		std::cout << str_ << std::endl;
+		std::cout << buff[0] << std::endl;
 	}
 	else
 	{
-		next_->ProcessLine(str_ + "\n");
+		next_->ProcessLine(buff[0]);
+		next_->ProcessLine("\n");
 		next_->HandleEndOfInput();
 	}
 	
@@ -86,29 +91,35 @@ void CatOperation::SetNextOperation(std::shared_ptr<IOperation> next)
 
 wcOperation::wcOperation(const std::string& str)
 {
-	ProcessLine(str);
 	size = 0;
+	ProcessLine(str);
 }
 void wcOperation::ProcessLine(const std::string& str)
 {
-	buff.push_back(str);
+	if (str == "\n")
+	{
+
+	}
+	else
+	{
+		if (isNumeric(str))
+		{
+			size += sizeof(std::stoi(str));
+		}
+		else
+		{
+			size += str.size();
+		}
+	}
 }
 void wcOperation::HandleEndOfInput()
 {
 	if (next_ == nullptr)
 	{
-		for (auto& el : buff)
-		{
-			size += sizeof(el);
-		}
-		std::cout << size;
+		std::cout << size << std::endl;
 	}
 	else
 	{
-		for (auto& el : buff)
-		{
-			size += sizeof(el);
-		}
 		next_->ProcessLine(std::to_string(size));
 		next_->ProcessLine("\n");
 		next_->HandleEndOfInput();

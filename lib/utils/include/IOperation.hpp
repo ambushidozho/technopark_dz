@@ -6,6 +6,8 @@
 #include <fstream>
 #include <sstream>
 
+bool isNumeric(std::string const& str);
+
 class IOperation
 {
 public:
@@ -24,7 +26,7 @@ public:
 	void SetNextOperation(std::shared_ptr<IOperation> next) override;
 private:
 	std::shared_ptr<IOperation> next_;
-	std::string str_;
+	std::vector<std::string> buff;
 };
 
 
