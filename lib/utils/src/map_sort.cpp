@@ -2,7 +2,7 @@
 
 
 
-void map_sort(std::map<std::string,Film>& map_of_films, std::vector<std::pair<std::string, Film>>& vec_of_films)
+void map_sort(std::unordered_map<std::string,Film>& map_of_films, std::vector<std::pair<std::string, Film>>& vec_of_films)
 {
     std::copy(map_of_films.begin(), map_of_films.end(),std::back_inserter<std::vector<std::pair<std::string, Film>>>(vec_of_films));
     std::sort(vec_of_films.begin(), vec_of_films.end(),

@@ -38,7 +38,7 @@ int main(int argc, char* argv[])
         std::cout << "wrong input parameters" << std::endl;
         return -1;
     }
-    std::map<std::string,Film> map_of_films;
+    std::unordered_map<std::string,Film> map_of_films;
     std::vector<std::pair<std::string, Film>> vec_of_films;
     Fill_map_from_file(file2_path, map_of_films);
     Remove_excess_films(file1_path, map_of_films, genre);
