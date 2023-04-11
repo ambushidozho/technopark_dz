@@ -2,9 +2,6 @@
 #include <string>
 #include <memory>
 #include <vector>
-#include <iostream>
-#include <fstream>
-#include <sstream>
 
 bool isNumeric(std::string const& str);
 
@@ -14,8 +11,6 @@ public:
 	void virtual ProcessLine(const std::string& str) = 0;
 	void virtual HandleEndOfInput() = 0;
 	void virtual SetNextOperation(std::shared_ptr<IOperation> IOperation) = 0;
-private:
-
 };
 
 class EchoOperation : public IOperation
@@ -46,10 +41,10 @@ private:
 };
 
 
-class wcOperation : public IOperation
+class WcOperation : public IOperation
 {
 public:
-	wcOperation(const std::string& str);
+	WcOperation();
 	void ProcessLine(const std::string& str) override;
 	void HandleEndOfInput() override;
 	void SetNextOperation(std::shared_ptr<IOperation> next) override;

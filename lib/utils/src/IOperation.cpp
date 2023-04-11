@@ -7,11 +7,6 @@
 #include <sstream>
 #include <algorithm>
 
-bool isNumeric(std::string const& str)
-{
-	return !str.empty() && std::all_of(str.begin(), str.end(), ::isdigit);
-}
-
 
 void EchoOperation::ProcessLine(const std::string& str)
 {
@@ -42,9 +37,8 @@ CatOperation::CatOperation()
 {
 
 }
-CatOperation::CatOperation(const std::string& filename)
+CatOperation::CatOperation(const std::string& filename) : filename_(filename)
 {
-	filename_ = filename;
 }
 void CatOperation::ProcessLine(const std::string& str)
 {
@@ -89,30 +83,18 @@ void CatOperation::SetNextOperation(std::shared_ptr<IOperation> next)
 
 
 
-wcOperation::wcOperation(const std::string& str)
+WcOperation::WcOperation(): size(0)
 {
-	size = 0;
-	ProcessLine(str);
+
 }
-void wcOperation::ProcessLine(const std::string& str)
+void WcOperation::ProcessLine(const std::string& str)
 {
 	if (str == "\n")
-	{
-
-	}
+		return;
 	else
-	{
-		if (isNumeric(str))
-		{
-			size += sizeof(std::stoi(str));
-		}
-		else
-		{
-			size += str.size();
-		}
-	}
+		size += str.size();
 }
-void wcOperation::HandleEndOfInput()
+void WcOperation::HandleEndOfInput()
 {
 	if (next_ == nullptr)
 	{
@@ -125,7 +107,7 @@ void wcOperation::HandleEndOfInput()
 		next_->HandleEndOfInput();
 	}
 }
-void wcOperation::SetNextOperation(std::shared_ptr<IOperation> next)
+void WcOperation::SetNextOperation(std::shared_ptr<IOperation> next)
 {
 	next_ = next;
 }
